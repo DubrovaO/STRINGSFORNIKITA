@@ -1,0 +1,12 @@
+
+#include "s21_string.h"
+
+
+#test strchr1
+char str19[100] = "12345", str20[100] = "ghjtfdW", str21[100] = "-12345%s",
+     str22[100] = "", str23[100] = "000/0";
+ck_assert_ptr_eq(s21_strchr(str19, '*'), strchr(str19, '*'));
+ck_assert_ptr_eq(s21_strchr(str20, 'j'), strchr(str20, 'j'));
+ck_assert_ptr_eq(s21_strchr(str21, '%' ), strchr(str21, '%'));
+ck_assert_ptr_eq(s21_strchr(str22, 'G' ), strchr(str22, 'G' ));
+ck_assert_ptr_eq(s21_strchr(str23, '0' ), strchr(str23, '0'));

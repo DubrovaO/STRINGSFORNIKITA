@@ -1,0 +1,50 @@
+#include "s21_string.h"
+
+#test memchr1
+char str24[100] = "", str25[100] = "string", str26[100] = "Atring", str27[100] = "StringA",
+str28[100] = "Str55333222ingA", str29[100] = "00000000";
+ck_assert_ptr_eq(s21_memchr(str24, '\0', 0), memchr(str24, '\0', 0));
+ck_assert_ptr_eq(s21_memchr(str25, '\0', 7), memchr(str25, '\0', 7));
+ck_assert_ptr_eq(s21_memchr(str26, 'A', 6), memchr(str26, 'A', 6));
+ck_assert_ptr_eq(s21_memchr(str27, 'A', 7), memchr(str27, 'A', 7));
+ck_assert_ptr_eq(s21_memchr(str28, '3', 15), memchr(str28, '3', 15));
+ck_assert_ptr_eq(s21_memchr(str29, '-', 9), memchr(str29, '-', 9));
+
+#test memcmp1
+char str31[100] = "aboba", str32[100] = "aboba", str33[100] = "Aboba",
+str34[100] = "1", str35[100] = "1",  str36[100] = "1234",  str37[100] = "13",
+ str38[100] = "111111111111111111112312312312312312434524563567adsfe 4rafa ewfseASDASD",
+ str39[100] = "111111111111111111112312312312312312434524563567adsfe 4rafa ewfseASDASd";
+ck_assert_int_eq(s21_memcmp(str31, str32, 0), memcmp(str31, str32, 0));
+ck_assert_int_eq(s21_memcmp(str31, str32, 3), memcmp(str31, str32, 3));
+ck_assert_int_eq(s21_memcmp(str31, str33, 1), memcmp(str31, str33, 1));
+ck_assert_int_eq(s21_memcmp(str34, str35, 0), memcmp(str34, str35, 0));
+ck_assert_int_eq(s21_memcmp(str34, str36, 1), memcmp(str34, str36, 1));
+ck_assert_int_eq(s21_memcmp(str36, str36, 2), memcmp(str36, str36, 2));
+ck_assert_int_eq(s21_memcmp(str36, str37, 2), memcmp(str36, str37, 2));
+ck_assert_int_eq(s21_memcmp(str38, str38, 71), memcmp(str38, str38, 71));
+ck_assert_int_eq(s21_memcmp(str38, str39, 71), memcmp(str38, str39, 71));
+
+#test memcpy1
+char str40[100] = "i hate memcmp", str41[100] = "aboba", str42[100] = "",
+ str43[100] = "I hate memcmp",str44[100] = "123",
+str45[100] = "aposkd AOSIjFasodijpaoisdjf poisdjfg";
+char dest[100] = {0};
+ck_assert_str_eq(s21_memcpy(str40, dest, 12), memcpy(str40, dest, 12));
+ck_assert_str_eq(s21_memcpy(str41, dest, 0), memcpy(str41, dest, 0));
+ck_assert_str_eq(s21_memcpy(str42, dest, 0), memcpy(str42, dest, 0));
+ck_assert_str_eq(s21_memcpy(str43, dest, 1), memcpy(str43, dest, 1));
+ck_assert_str_eq(s21_memcpy(str44, dest, 3), memcpy(str44, dest, 2));
+ck_assert_str_eq(s21_memcpy(str45, dest, 28), memcpy(str45, dest, 28));
+
+#test memmove1
+char str46[100] = "i love memcmp",  str47[100] = "aboba", str48[100] = "",
+ str49[100] = "I love memcmp",  str50[100] = "123",
+str51[100] = "aposkd AOSIjFasodijpaoisdjf poisdjfg";
+char dest[100] = "0000000000000000";
+ck_assert_str_eq(s21_memmove(str46, dest, 12), memmove(str46, dest, 12));
+ck_assert_str_eq(s21_memmove(str47, dest, 0), memmove(str47, dest, 0));
+ck_assert_str_eq(s21_memmove(str48, dest, 0), memmove(str48, dest, 0));
+ck_assert_str_eq(s21_memmove(str49, dest, 1), memmove(str49, dest, 1));
+ck_assert_str_eq(s21_memmove(str50, dest, 3), memmove(str50, dest, 2));
+ck_assert_str_eq(s21_memmove(str51, dest, 28), memmove(str51, dest, 28));

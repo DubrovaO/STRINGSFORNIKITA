@@ -1,0 +1,788 @@
+#include "s21_string.h"
+
+#test sprintf1
+
+char mas1[BUFFSIZE];
+char mas2[BUFFSIZE];
+char *format = "This is a simple value %d";
+int val = 69;
+ck_assert_int_eq(s21_sprintf(mas1, format, val),
+                     sprintf(mas2, format, val));
+ck_assert_str_eq(mas1, mas2);
+
+#test sprintf2
+char mas3[BUFFSIZE];
+char mas4[BUFFSIZE];
+
+    char *format = "%.5i";
+    int val = 69;
+    ck_assert_int_eq(s21_sprintf(mas3, format, val),
+                     sprintf(mas4, format, val));
+
+    ck_assert_str_eq(mas3, mas4);
+
+#test sprintf3    
+
+char mas5[BUFFSIZE];
+char mas6[BUFFSIZE];
+
+    char *format = "%5d";
+    int val = 69;
+    ck_assert_int_eq(s21_sprintf(mas5, format, val),
+                     sprintf(mas6, format, val));
+
+    ck_assert_str_eq(mas5, mas6);
+
+    #test sprintf4
+
+char mas7[BUFFSIZE];
+char mas8[BUFFSIZE];
+
+    char *format = "%-5i";
+    int val = 69;
+    ck_assert_int_eq(s21_sprintf(mas7, format, val),
+                     sprintf(mas8, format, val));
+
+    ck_assert_str_eq(mas7, mas8);
+
+    #test sprintf5
+
+    char mas9[BUFFSIZE];
+    char mas10[BUFFSIZE];
+
+    char *format = "%+12d";
+    int val = 69;
+    ck_assert_int_eq(s21_sprintf(mas9, format, val),
+                     sprintf(mas10, format, val));
+
+    ck_assert_str_eq(mas9, mas10);
+
+    #test sprintf6
+    char mas11[BUFFSIZE];
+    char mas12[BUFFSIZE];
+
+    char *format = "%012i";
+    int val = 69;
+    ck_assert_int_eq(s21_sprintf(mas11, format, val),
+                     sprintf(mas12, format, val));
+
+    ck_assert_str_eq(mas11, mas12);
+
+    #test sprintf7
+
+    char mas13[BUFFSIZE];
+    char mas14[BUFFSIZE];
+
+    char *format = "%0*d";
+    int val = 69;
+    ck_assert_int_eq(s21_sprintf(mas13, format, 5, val),
+                     sprintf(mas14, format, 5, val));
+
+    ck_assert_str_eq(mas13, mas14);
+
+    #test sprintf8
+    char mas15[BUFFSIZE];
+    char mas16[BUFFSIZE];
+
+    char *format = "%0.*i";
+    int val = 69;
+    ck_assert_int_eq(s21_sprintf(mas15, format, 5, val),
+                     sprintf(mas16, format, 5, val));
+
+    ck_assert_str_eq(mas15, mas16);
+
+    #test sprintf9
+    char mas17[BUFFSIZE];
+    char mas18[BUFFSIZE];
+
+    char format[] = "%0.*i %d %4.*i %013d %d";
+    int val = 69;
+    ck_assert_int_eq(
+        s21_sprintf(mas17, format, 5, val, -10431, 13, 5311, 0, -581813581),
+        sprintf(mas18, format, 5, val, -10431, 13, 5311, 0, -581813581));
+
+    ck_assert_str_eq(mas17, mas18);
+
+    #test sprintf10
+    char mas19[BUFFSIZE];
+    char mas20[BUFFSIZE];
+
+    char *format = "%+5.31li";
+    long int val = 698518581899;
+    ck_assert_int_eq(s21_sprintf(mas19, format, val),
+                     sprintf(mas20, format, val));
+
+    ck_assert_str_eq(mas19, mas20);
+
+    #test sprintf11
+    char mas21[BUFFSIZE];
+    char mas22[BUFFSIZE];
+
+    char *format = "%-16.9hi";
+    short int val = 6958;
+    ck_assert_int_eq(s21_sprintf(mas21, format, val),
+                     sprintf(mas22, format, val));
+
+    ck_assert_str_eq(mas21, mas22);
+
+    #test sprintf12
+    char mas23[BUFFSIZE];
+    char mas24[BUFFSIZE];
+
+    char *format = "%0.*ld";
+    long val = 8581385185;
+    ck_assert_int_eq(s21_sprintf(mas23, format, 5, val),
+                     sprintf(mas24, format, 5, val));
+
+    ck_assert_str_eq(mas23, mas24);
+
+    #test sprintf13
+    char mas25[BUFFSIZE];
+    char mas26[BUFFSIZE];
+
+    char *format = "%.0d";
+    int val = 0;
+    ck_assert_int_eq(s21_sprintf(mas25, format, val),
+                     sprintf(mas26, format, val));
+
+    ck_assert_str_eq(mas25, mas26);
+
+    #test sprintf14
+    char mas27[BUFFSIZE];
+    char mas28[BUFFSIZE];
+
+    char *format = "% d";
+    int val = 0;
+    ck_assert_int_eq(s21_sprintf(mas27, format, val),
+                     sprintf(mas28, format, val));
+
+    ck_assert_str_eq(mas27, mas28);
+
+    #test sprintf15
+    char mas29[BUFFSIZE];
+    char mas30[BUFFSIZE];
+
+    char *format = "%u";
+    unsigned int val = 14140;
+    ck_assert_int_eq(s21_sprintf(mas29, format, val),
+                     sprintf(mas30, format, val));
+
+    ck_assert_str_eq(mas29, mas30);
+
+    #test sprintf16
+    char mas31[BUFFSIZE];
+    char mas32[BUFFSIZE];
+
+    char *format = "%15u";
+    unsigned int val = 14140;
+    ck_assert_int_eq(s21_sprintf(mas31, format, val),
+                     sprintf(mas32, format, val));
+
+    ck_assert_str_eq(mas31, mas32);
+
+    #test sprintf17
+    char mas33[BUFFSIZE];
+    char mas34[BUFFSIZE];
+
+    char *format = "%-16u";
+    unsigned int val = 14140;
+    ck_assert_int_eq(s21_sprintf(mas33, format, val),
+                     sprintf(mas34, format, val));
+
+    ck_assert_str_eq(mas33, mas34);
+
+    #test sprintf18
+    char mas35[BUFFSIZE];
+    char mas36[BUFFSIZE];
+
+    char *format = "%.51u";
+    unsigned int val = 14140;
+    ck_assert_int_eq(s21_sprintf(mas35, format, val),
+                     sprintf(mas36, format, val));
+
+    ck_assert_str_eq(mas35, mas36);
+    #test sprintf19
+    char mas37[BUFFSIZE];
+    char mas38[BUFFSIZE];
+
+    char *format = "% 5.51u";
+    unsigned int val = 14140;
+    ck_assert_int_eq(s21_sprintf(mas37, format, val),
+                     sprintf(mas38, format, val));
+
+    ck_assert_str_eq(mas37, mas38);
+    #test sprintf20
+    char mas39[BUFFSIZE];
+    char mas40[BUFFSIZE];
+
+    char *format = "%hu";
+    unsigned short int val = 14140;
+    ck_assert_int_eq(s21_sprintf(mas39, format, val),
+                     sprintf(mas40, format, val));
+
+    ck_assert_str_eq(mas39, mas40);
+
+    #test sprintf21
+    char mas41[BUFFSIZE];
+    char mas42[BUFFSIZE];
+
+    char *format = "%u";
+    unsigned long int val = 9114140;
+    ck_assert_int_eq(s21_sprintf(mas41, format, val),
+                     sprintf(mas42, format, val));
+
+    ck_assert_str_eq(mas41, mas42);
+
+    #test sprintf22
+    char mas42[BUFFSIZE];
+    char mas43[BUFFSIZE];
+
+    char *format = "%u, %u, %hu, %.5u, %5.u";
+    unsigned long int val = 9114140;
+    ck_assert_int_eq(s21_sprintf(mas42, format, val, 14, 1441, 14414, 9681),
+                     sprintf(mas43, format, val, (unsigned)14,
+                             (unsigned short)1441, (unsigned)14414,
+                             (unsigned)9681));
+
+    ck_assert_str_eq(mas42, mas43);
+
+
+    #test sprintf23    
+
+    char str70[BUFFSIZE];
+    char str71[BUFFSIZE];
+
+    char *format = "%c";
+    char val = 'X';
+    ck_assert_int_eq(s21_sprintf(str70, format, val),
+                     sprintf(str71, format, val));
+
+    ck_assert_str_eq(str70, str71);
+
+    #test sprintf24
+
+    char str72[BUFFSIZE];
+    char str73[BUFFSIZE];
+
+    char *format = "%.5c";
+    char val = 'c';
+    ck_assert_int_eq(s21_sprintf(str72, format, val),
+                     sprintf(str73, format, val));
+
+    ck_assert_str_eq(str72, str73);
+
+    #test sprintf25
+
+
+    char str74[BUFFSIZE];
+    char str75[BUFFSIZE];
+
+    char *format = "% -5c";
+    char val = 'c';
+    ck_assert_int_eq(s21_sprintf(str74, format, val),
+                     sprintf(str75, format, val));
+
+    ck_assert_str_eq(str74, str75);
+
+    #test sprintf26
+
+    char str76[BUFFSIZE];
+    char str77[BUFFSIZE];
+
+    char *format = "%15c";
+    char val = 'c';
+    ck_assert_int_eq(s21_sprintf(str76, format, val),
+                     sprintf(str77, format, val));
+
+    ck_assert_str_eq(str76, str77);
+
+    #test sprintf27
+
+    char str78[BUFFSIZE];
+    char str79[BUFFSIZE];
+
+    char *format = "%-5.3c%c%c%c%c Hello! ABOBA";
+    char val = 'c';
+    ck_assert_int_eq(s21_sprintf(str78, format, val, 'c', 'a', 'b', 'b'),
+                     sprintf(str79, format, val, 'c', 'a', 'b', 'b'));
+
+    ck_assert_str_eq(str78, str79);
+
+    #test sprintf28
+
+    char str80[BUFFSIZE];
+    char str81[BUFFSIZE];
+
+    char *format = "%-5.3c";
+    char val = 'c';
+    ck_assert_int_eq(s21_sprintf(str80, format, val),
+                     sprintf(str81, format, val));
+
+    ck_assert_str_eq(str80, str81);
+
+    #test sprintf29
+
+    char str82[BUFFSIZE];
+    char str83[BUFFSIZE];
+
+    char *format = "%-5.3c";
+    char val = 'c';
+    ck_assert_int_eq(s21_sprintf(str82, format, val),
+                     sprintf(str83, format, val));
+
+    ck_assert_str_eq(str82, str83);
+
+    #test sprintf30
+
+    char str84[BUFFSIZE];
+    char str85[BUFFSIZE];
+
+    char *format = "%s";
+    char *val = "I LOVE STRINGS AND TESTS AND SCHOOL21 NO JOKE";
+    ck_assert_int_eq(s21_sprintf(str84, format, val),
+                     sprintf(str85, format, val));
+
+    ck_assert_str_eq(str84, str85);
+
+    #test sprintf31
+
+    char str86[BUFFSIZE];
+    char str87[BUFFSIZE];
+
+    char *format = "%.15s";
+    char *val = "I LOVE STRINGS AND TESTS AND SCHOOL21 NO JOKE";
+    ck_assert_int_eq(s21_sprintf(str86, format, val),
+                     sprintf(str87, format, val));
+
+    ck_assert_str_eq(str86, str87);
+
+     #test sprintf32
+
+    char str88[BUFFSIZE];
+    char str89[BUFFSIZE];
+
+    char *format = "%15s";
+    char *val = "69 IS MY FAVORITE NUMBER";
+    ck_assert_int_eq(s21_sprintf(str88, format, val),
+                     sprintf(str89, format, val));
+
+    ck_assert_str_eq(str88, str89);
+
+
+     #test sprintf33
+
+    char str90[BUFFSIZE];
+    char str91[BUFFSIZE];
+
+    char *format = "%-15.9s";
+    char *val = "69 IS MY FAVORITE NUMBER";
+    ck_assert_int_eq(s21_sprintf(str90, format, val),
+                     sprintf(str91, format, val));
+
+    ck_assert_str_eq(str90, str91);
+
+
+     #test sprintf34
+
+    char str92[BUFFSIZE];
+    char str93[BUFFSIZE];
+
+    char *format = "%s";
+    char *val =
+        "69 IS MY FAVORITE NUMBER THIS IS SUPPOSED TO BE A VERY LONG STRING";
+    ck_assert_int_eq(s21_sprintf(str92, format, val),
+                     sprintf(str93, format, val));
+
+    ck_assert_str_eq(str92, str93);
+
+
+    #test sprintf35
+
+    char str94[BUFFSIZE];
+    char str95[BUFFSIZE];
+
+    char *format = "%s%s%s%s";
+    char *val =
+        "69 IS MY FAVORITE NUMBER THIS IS SUPPOSED TO BE A VERY LONG STRING";
+    char *s1 = "";
+    char *s2 = "87418347813748913749871389480913";
+    char *s3 = "HAHAABOBASUCKER";
+    ck_assert_int_eq(s21_sprintf(str94, format, val, s1, s2, s3),
+                     sprintf(str95, format, val, s1, s2, s3));
+
+    ck_assert_str_eq(str94, str95);
+
+    #test sprintf36
+
+    char str96[BUFFSIZE];
+    char str97[BUFFSIZE];
+    char *val = "kjafdiuhfjahfjdahf";
+    char *format = "%120s";
+    ck_assert_int_eq(s21_sprintf(str96, format, val),
+                     sprintf(str97, format, val));
+
+    ck_assert_str_eq(str96, str97);
+
+    #test sprintf37
+
+    char str98[BUFFSIZE];
+    char str99[BUFFSIZE];
+    char *format = "%10f";
+    long double val = 15.35;
+    ck_assert_int_eq(s21_sprintf(str98, format, val),
+                     sprintf(str99, format, val));
+
+    ck_assert_str_eq(str98, str99);
+
+
+    #test sprintf38
+
+    char str100[BUFFSIZE];
+    char str101[BUFFSIZE];
+    char format[6] = "%.0f";
+    long double val = 15.35;
+    ck_assert_int_eq(s21_sprintf(str100, format, val),
+                     sprintf(str101, format, val));
+
+    ck_assert_str_eq(str100, str101);
+
+    #test sprintf39
+
+    char str102[BUFFSIZE];
+    char str103[BUFFSIZE];
+    char *format = "%.f";
+    long double val = 15.35;
+    ck_assert_int_eq(s21_sprintf(str102, format, val),
+                     sprintf(str103, format, val));
+
+    ck_assert_str_eq(str102, str103);
+
+
+    #test sprintf40
+
+    char str104[BUFFSIZE];
+    char str105[BUFFSIZE];
+    char *format = "%.15f";
+    long double val = 15.35;
+    ck_assert_int_eq(s21_sprintf(str104, format, val),
+                     sprintf(str105, format, val));
+
+    ck_assert_str_eq(str104, str105);
+
+    #test sprintf41
+
+    char str106[BUFFSIZE];
+    char str107[BUFFSIZE];
+    char *format = "%.15f";
+    long double val = -15.35581134;
+    ck_assert_int_eq(s21_sprintf(str106, format, val),
+                     sprintf(str107, format, val));
+
+    ck_assert_str_eq(str106, str107);
+
+    #test sprintf42
+
+    char str108[BUFFSIZE];
+    char str109[BUFFSIZE];
+    char *format = "%f";
+    long double val = 72537572375.1431341;
+    ck_assert_int_eq(s21_sprintf(str108, format, val),
+                     sprintf(str109, format, val));
+
+    ck_assert_str_eq(str108, str109);
+
+    #test sprintf43
+
+    char str1008[BUFFSIZE];
+    char str1009[BUFFSIZE];
+    char *format = "% f";
+    float val = 0;
+    ck_assert_int_eq(s21_sprintf(str1008, format, val),
+                     sprintf(str1009, format, val));
+
+    ck_assert_str_eq(str1008, str1009);
+
+
+    #test sprintf47
+
+    char str116[BUFFSIZE];
+    char str117[BUFFSIZE];
+    ck_assert_int_eq(s21_sprintf(str116, "%c%c%c%c%c", '\t', '\n', '0', 'S', 's'),
+                     sprintf(str117, "%c%c%c%c%c", '\t', '\n', '0', 'S', 's'));
+
+    ck_assert_str_eq(str116, str117);
+
+    #test sprintf48
+
+    char str118[BUFFSIZE];
+    char str119[BUFFSIZE];
+
+    ck_assert_int_eq(s21_sprintf(str118, "%s", "Drop Sega PLS"),
+                     sprintf(str119, "%s", "Drop Sega PLS"));
+
+    ck_assert_str_eq(str118, str119);
+
+
+    #test sprintf49
+
+    char str120[BUFFSIZE];
+    char str121[BUFFSIZE];
+
+    ck_assert_int_eq(
+        s21_sprintf(str120, "%s%s%s%s%s", "Drop", " ", "Sega", " ", "PLS"),
+        sprintf(str121, "%s%s%s%s%s", "Drop", " ", "Sega", " ", "PLS"));
+
+    ck_assert_str_eq(str120, str121);
+
+    #test sprintf50
+
+    char str122[BUFFSIZE];
+    char str123[BUFFSIZE];
+
+    ck_assert_int_eq(s21_sprintf(str122, "%d", 666), sprintf(str123, "%d", 666));
+
+    ck_assert_str_eq(str122, str123);
+
+
+    #test sprintf51
+
+    char str124[BUFFSIZE];
+    char str125[BUFFSIZE];
+
+    ck_assert_int_eq(s21_sprintf(str124, "%d%d%d%d", -999, 0, 666, -100),
+                     sprintf(str125, "%d%d%d%d", -999, 0, 666, -100));
+
+    ck_assert_str_eq(str124, str125);
+
+    #test sprintf52
+
+    char str126[BUFFSIZE];
+    char str127[BUFFSIZE];
+
+    ck_assert_int_eq(s21_sprintf(str126, "%i", -0), sprintf(str127, "%i", -0));
+
+    ck_assert_str_eq(str126, str127);
+
+    #test sprintf53
+
+    char str128[BUFFSIZE];
+    char str129[BUFFSIZE];
+
+    ck_assert_int_eq(s21_sprintf(str128, "%i%i%i%i", -999, 0, 666, -100),
+                     sprintf(str129, "%i%i%i%i", -999, 0, 666, -100));
+
+    ck_assert_str_eq(str128, str129);
+
+    #test sprintf54
+
+    char str130[BUFFSIZE];
+    char str131[BUFFSIZE];
+
+    ck_assert_int_eq(s21_sprintf(str130, "%f", 0.0001),
+                     sprintf(str131, "%f", 0.0001));
+
+    ck_assert_str_eq(str130, str131);
+
+    #test sprintf56
+
+    char str134[BUFFSIZE];
+    char str135[BUFFSIZE];
+
+    ck_assert_int_eq(s21_sprintf(str134, "%u", 100),
+                     sprintf(str135, "%u", (unsigned)100));
+
+    ck_assert_str_eq(str134, str135);
+
+
+    #test sprintf57
+
+    char str136[BUFFSIZE];
+    char str137[BUFFSIZE];
+
+    ck_assert_int_eq(s21_sprintf(str136, "%u%u%u%u", 999, 0, 666, 100),
+                     sprintf(str137, "%u%u%u%u", (unsigned)999, (unsigned)0,
+                             (unsigned)666, (unsigned)100));
+
+    ck_assert_str_eq(str136, str137);
+
+    #test sprintf58
+
+    char str138[BUFFSIZE];
+    char str139[BUFFSIZE];
+
+    ck_assert_int_eq(s21_sprintf(str138, "%8c", '\t'),
+                     sprintf(str139, "%8c", '\t'));
+
+    ck_assert_str_eq(str138, str139);
+
+
+    #test sprintf59
+
+    char str140[BUFFSIZE];
+    char str141[BUFFSIZE];
+
+    ck_assert_int_eq(s21_sprintf(str140, "%-8c", '\t'),
+                     sprintf(str141, "%-8c", '\t'));
+
+    ck_assert_str_eq(str140, str141);
+
+    #test sprintf60
+
+    char str142[BUFFSIZE];
+    char str143[BUFFSIZE];
+
+    ck_assert_int_eq(
+        s21_sprintf(str142, "%3c%-11c%10c%-2c%c", '\t', '\n', '0', 'S', 's'),
+        sprintf(str143, "%3c%-11c%10c%-2c%c", '\t', '\n', '0', 'S', 's'));
+
+    ck_assert_str_eq(str142, str143);
+
+    #test sprintf61
+
+    char str144[BUFFSIZE];
+    char str145[BUFFSIZE];
+    char format[] = "%10ld";
+
+    ck_assert_int_eq(s21_sprintf(str144, format, 1), sprintf(str145, format, 1));
+
+    ck_assert_str_eq(str144, str145);
+
+    #test sprintf62
+
+    char str146[BUFFSIZE];
+    char str147[BUFFSIZE];
+    char format[] = "%1.1f";
+
+    ck_assert_int_eq(s21_sprintf(str146, format, 1.1),
+                     sprintf(str147, format, 1.1));
+
+    ck_assert_str_eq(str146, str147);
+
+
+    #test sprintf63
+
+    char str148[BUFFSIZE];
+    char str149[BUFFSIZE];
+    char format[] = "%8.3c";
+
+    ck_assert_int_eq(s21_sprintf(str148, format, 'a'),
+                     sprintf(str149, format, 'a'));
+
+    ck_assert_str_eq(str148, str149);
+
+
+    #test sprintf64
+
+    char str150[BUFFSIZE];
+    char str151[BUFFSIZE];
+    char format[] = "%+5.5d aboba";
+
+    int val = 10000;
+    int a = s21_sprintf(str150, format, val);
+    int b = sprintf(str151, format, val);
+    ck_assert_int_eq(a, b);
+
+    ck_assert_str_eq(str150, str151);
+
+    #test sprintf65
+
+    char str152[BUFFSIZE];
+    char str153[BUFFSIZE];
+    char format[] = "%7.7f";
+
+    ck_assert_int_eq(s21_sprintf(str152, format, 11.123456),
+                     sprintf(str153, format, 11.123456));
+
+    ck_assert_str_eq(str152, str153);
+
+    #test sprintf66
+
+    char str154[BUFFSIZE];
+    char str155[BUFFSIZE];
+    char format[] = "%7.4s";
+
+    ck_assert_int_eq(s21_sprintf(str154, format, "aboba floppa"),
+                     sprintf(str155, format, "aboba floppa"));
+
+    ck_assert_str_eq(str154, str155);
+
+    #test sprintf67
+
+    char str156[BUFFSIZE];
+    char str157[BUFFSIZE];
+    char format[] = "%6.6u";
+
+    ck_assert_int_eq(s21_sprintf(str156, format, 12341151),
+                     sprintf(str157, format, 12341151));
+
+    ck_assert_str_eq(str156, str157);
+
+    #test sprintf68
+
+    char str158[BUFFSIZE];
+    char str159[BUFFSIZE];
+    char format[] = "%li%ld%lu";
+
+    ck_assert_int_eq(s21_sprintf(str158, format, 666666666666, 777, 111),
+                     sprintf(str159, format, 666666666666, 777, 111));
+
+    ck_assert_str_eq(str158, str159);
+
+    #test sprintf69
+
+    char str160[BUFFSIZE];
+    char str161[BUFFSIZE];
+    char format[] = "%li%ld%lu";
+
+    ck_assert_int_eq(s21_sprintf(str160, format, 666666666666, 777, 111),
+                     sprintf(str161, format, 666666666666, 777, 111));
+
+    ck_assert_str_eq(str160, str161);
+
+    #test sprintf70
+
+    char str162[BUFFSIZE];
+    char str163[BUFFSIZE];
+    char format[] = "% s";
+
+    ck_assert_int_eq(s21_sprintf(str162, format, "aboba likes floppa"),
+                     sprintf(str163, format, "aboba likes floppa"));
+
+    ck_assert_str_eq(str162, str163);
+
+    #test sprintf71
+
+    char str164[BUFFSIZE];
+    char str165[BUFFSIZE];
+    char format[] = "% s% c";
+
+    ck_assert_int_eq(s21_sprintf(str164, format, "", 'f'),
+                     sprintf(str165, format, "", 'f'));
+
+    ck_assert_str_eq(str164, str165);
+
+
+    #test sprintf72
+
+    char str165[BUFFSIZE];
+    char str166[BUFFSIZE];
+    char *format = "%210s";
+
+    ck_assert_int_eq(s21_sprintf(str165, format, "AHHAHAHA\0AHHAHAHAH"),
+                     sprintf(str166, format, "AHHAHAHA\0AHHAHAHAH"));
+
+    ck_assert_str_eq(str165, str166);
+
+
+
+
+
+
+
+
+
+
+
+
+
+

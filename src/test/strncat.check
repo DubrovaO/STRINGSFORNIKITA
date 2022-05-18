@@ -1,0 +1,11 @@
+#include "s21_string.h"
+
+#test strncat1
+char str11[100] = "12345", str12[100] = "6789", str13[100] = "-12345%s",
+     str14[100] = "", str15[100] = "000/0";
+char str16[100] = "", str17[100] = "45rtvb", str18[100] = "0000\n";
+ck_assert_str_eq(s21_strncat(str11, str16, 2), strncat(str11, str16, 2));
+ck_assert_str_eq(s21_strncat(str12, str17, 0), strncat(str12, str17, 0));
+ck_assert_str_eq(s21_strncat(str13, str18, 10), strncat(str13, str18, 10));
+ck_assert_str_eq(s21_strncat(str14, str16, 5), strncat(str14, str16, 5));
+ck_assert_str_eq(s21_strncat(str15, str17, 1), strncat(str15, str17, 1));
