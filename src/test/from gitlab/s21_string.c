@@ -130,10 +130,20 @@ int s21_strcmp(const char *str1, const char *str2) {
 }
 
 int s21_strncmp(const char *str1, const char *str2, size_t n) {
-    while (n-- - 1 && *str1 && *str1 == *str2) {
-        str1++, str2++;
+    str1 = (char *)str1;
+    str2 = (char *)str2;
+    int i = 0;
+
+    while (n--) {
+        if (*str1 == *str2) {
+            str1++;
+            str2++;
+        } else {
+            i = *str1 - *str2;
+            return i;
+        }
     }
-    return (*str1 - *str2);
+    return i;
 }
 
 char *s21_strcpy(char *dest, const char *src) {
@@ -181,19 +191,22 @@ s21_size_t s21_strcspn(const char *str1, const char *str2) {
 }
 
 char *s21_strerror(int errnum) {
-    static char *array[] = ERRLIST;
-    static char *err;
-    err = array[errnum];
-    static char buffer[1024];
+  static char *array[] = ERRLIST;
+  static char *err = {'\0'};
+
+  err = array[errnum];
+
+  static char buffer[1024];
+  for (int i = 0; i < 1024; i++) buffer[i] = '\0';
 #if defined(__APPLE__)
-    sprintf(buffer, "%s%d", "Unknown error: %d", (int)errnum);
+  s21_sprintf(buffer, "%s%d", UERROR, (int)errnum);
 #elif defined(__linux__)
-    sprintf(buffer, sizeof(buffer), "Unknown error %d", (int)errnum);
+  s21_sprintf(buffer, "%s%d", UERROR, (int)errnum);
 #endif
-    if (err == s21_NULL || errnum > MAX_ERROR || errnum < 0) {
-        err = buffer;
-    }
-    return err;
+  if (err == s21_NULL || errnum > MAX_ERROR || errnum < 0) {
+    err = buffer;
+  }
+  return err;
 }
 
 s21_size_t s21_strlen(const char *str) {
@@ -225,13 +238,17 @@ char *s21_strpbrk(const char *str1, const char *str2) {
 
 char *s21_strrchr(const char *str, int c) {
     char *number = s21_NULL;
+          
     while (*str != '\0') {
         if (*str == (char) c) {
             number = (char*)str;
         }
         str++;
     }
-    return number;
+    if (c == '\0')
+       number = ++str;
+    
+     return number;
 }
 
 s21_size_t s21_strspn(const char *str1, const char *str2) {
