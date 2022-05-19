@@ -1,9 +1,9 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -std=c11 
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -std=c11 
 CCOV = -fprofile-arcs -ftest-coverage
 GFLAGS = --coverage
 LDFLAGS = -lgcov
-TFLAGS = -lcheck
+TFLAGS = -lcheck -fsanitize=address
 
 
 all: test s21_string.a gcov_report

@@ -315,7 +315,7 @@ void helper_cutStr(char *str, int pres, int isSetByZero) {
         k = 0;
     } else {
         k = pres <= 0 ? 6 : pres;
-        while (str[i] != '.') str++;
+        while (str[i] != '.') str[i++];
     }
 
     while (k != 0 && *str) {

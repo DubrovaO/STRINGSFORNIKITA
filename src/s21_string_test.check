@@ -3,6 +3,17 @@
 #include <string.h>
 #include "s21_string.h"
 
+#test sprintf2
+char mas3[BUFFSIZE];
+char mas4[BUFFSIZE];
+
+    char *format = "%.5i";
+    int val = 69;
+    ck_assert_int_eq(s21_sprintf(mas3, format, val),
+                     sprintf(mas4, format, val));
+
+    ck_assert_str_eq(mas3, mas4);
+
 #test memchr_test
 char str24[100] = "", str25[100] = "string", str26[100] = "Atring", str27[100] = "StringA",
 str28[100] = "Str55333222ingA", str29[100] = "00000000";
@@ -372,17 +383,6 @@ int val = 69;
 ck_assert_int_eq(s21_sprintf(mas1, format, val),
                      sprintf(mas2, format, val));
 ck_assert_str_eq(mas1, mas2);
-
-#test sprintf2
-char mas3[BUFFSIZE];
-char mas4[BUFFSIZE];
-
-    char *format = "%.5i";
-    int val = 69;
-    ck_assert_int_eq(s21_sprintf(mas3, format, val),
-                     sprintf(mas4, format, val));
-
-    ck_assert_str_eq(mas3, mas4);
 
 #test sprintf3    
 
