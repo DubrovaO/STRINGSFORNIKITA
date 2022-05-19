@@ -499,17 +499,6 @@ char mas8[BUFFSIZE];
 
     ck_assert_str_eq(mas23, mas24);
 
-    #test sprintf13
-    char mas25[BUFFSIZE];
-    char mas26[BUFFSIZE];
-
-    char *format = "%.0d";
-    int val = 0;
-    ck_assert_int_eq(s21_sprintf(mas25, format, val),
-                     sprintf(mas26, format, val));
-
-    ck_assert_str_eq(mas25, mas26);
-
     #test sprintf14
     char mas27[BUFFSIZE];
     char mas28[BUFFSIZE];

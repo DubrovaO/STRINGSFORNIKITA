@@ -1,14 +1,14 @@
 #include "s21_string.h"
-int main() {
-    char buff[50];
-    int s = 0;
-    s = s21_sprintf(buff, "%-10s, %-10s, %-10s, %-10s", "Hi", "Hi", "Hi",
-                    "Hi...");
-    printf("%d\n", s);
-    printf("%s\n", buff);
+// int main() {
+//     char buff[50];
+//     int s = 0;
+//     s = s21_sprintf(buff, "%-10s, %-10s, %-10s, %-10s", "Hi", "Hi", "Hi",
+//                     "Hi...");
+//     printf("%d\n", s);
+//     printf("%s\n", buff);
 
-    return (0);
-}
+//     return (0);
+// }
 int s21_sprintf(char *str, const char *format, ...) {
     va_list vlist;
     char *tmp = str;

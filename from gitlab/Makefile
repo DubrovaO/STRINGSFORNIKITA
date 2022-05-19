@@ -3,14 +3,7 @@ CFLAGS = -Wall -Wextra -Werror -std=c11
 CCOV = -fprofile-arcs -ftest-coverage
 GFLAGS = --coverage
 LDFLAGS = -lgcov
-TFLAGS = -lcheck -lm -lpthread
-UNAME:=$(shell uname -s)
-ifeq ($(_UNAME_),Linux)
-	ADD_FLAGS = -lrt -lsubunit
-endif
-ifeq ($(_UNAME_),Darwin)
-	ADD_FLAGS =
-endif
+TFLAGS = -lcheck
 
 
 all: test s21_string.a gcov_report
